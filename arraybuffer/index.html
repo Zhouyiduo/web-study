@@ -1,0 +1,48 @@
+<html>
+    <head>
+    </head>
+
+    <script>
+        function loadArrayBuffer()
+        {
+            console.log("load arraybuffer");
+            getArrayBuffer("load-arraybuffer",callbackArraBuffer);
+
+        }
+
+        function getArrayBuffer(url,callback)
+        {
+            var xhr = new XMLHttpRequest();
+            
+            xhr.onload = function(){
+                if (this.status == 200) 
+                {
+                    callback(xhr.response);
+                }
+            }
+            xhr.open("GET","load-arraybuffer");
+            xhr.responseType = "arraybuffer";
+            //xhr.setRequestHeader("content-type","application/x-www-form-urlencoded");
+            xhr.send(null);
+        }
+
+        function callbackArraBuffer(response)
+        {
+            var chunkView = new DataView(response);
+
+            var chunkData = new TextDecoder().decode( response );
+            //var chunkArr = Array.from(response); 
+            //var val1 = chunkView.getInt16(0, true);
+            //var val2 = chunkView.getInt16(8, true);
+            //var val3 = chunkView.getInt16(16, true);
+            //var val4 = chunkView.getInt16(24, true); 
+        }
+
+    </script>
+    
+    <body>
+        <div id="myDiv"><h2> xhr 测试 arraybuffer. </h2></div>
+        <button type="button" id = "mybutton" onclick="loadArrayBuffer()" > 测试 </button>
+        <div id ="div1" ><div>
+    </body>
+</html>
